@@ -54,7 +54,7 @@
 //             var yawRotation = Quaternion.LookRotation(yaw, Vector3.up);
 //             var rotation = Quaternion.LookRotation(delta, Vector3.up);
 //
-//             // カメラの移動範囲を限定
+//             // 限制摄像机的移动范围。
 //             rotation.eulerAngles = new Vector3(
 //                 Mathf.Clamp(rotation.eulerAngles.x, _minClamp * Mathf.Rad2Deg, _maxClamp * Mathf.Rad2Deg),
 //                 rotation.eulerAngles.y,

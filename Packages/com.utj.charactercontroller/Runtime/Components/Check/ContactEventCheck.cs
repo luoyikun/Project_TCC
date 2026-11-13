@@ -8,8 +8,8 @@
 // namespace TinyCharacterController
 // {
 //     /// <summary>
-//     /// オブジェクトの接触を検知する。
-//     /// 接触中のオブジェクト
+//     /// 检测对象之间的接触。
+//     /// 当前正在接触的对象。
 //     /// </summary>
 //     [DefaultExecutionOrder(Order.Check)]
 //     public class ContactEventCheck : MonoBehaviour, IUpdateComponent

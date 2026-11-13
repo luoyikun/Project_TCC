@@ -8,10 +8,11 @@ namespace UTJ
 {
     public class FindGameObjectsWindow : EditorWindow
     {
-        [MenuItem("UTJ/名前で選択窓")]
+        /// <summary>打开按名称查找并选择对象的窗口。</summary>
+        [MenuItem("UTJ/按名称选择对象")]
         public static void ShowWindow()
         {
-            var window = GetWindow<FindGameObjectsWindow>("名前で選択");
+            var window = GetWindow<FindGameObjectsWindow>("按名称选择");
             window.OnShow();
         }
 
@@ -268,6 +269,7 @@ namespace UTJ
             };
         }
 
+        /// <summary>绘制查找条件、结果和对象选择控件。</summary>
         private void OnGUI()
         {
             ReacquireData();
@@ -278,18 +280,18 @@ namespace UTJ
 
             var rowWidth = position.width - Spacing * 2f;
             var fieldPositions = GetTextFieldPositions(Spacing, Spacing, rowWidth, RowHeight, Spacing);
-            DoTextFieldWithClearButton(ref fieldPositions, "名前", ref objectPattern, RestartSearchCountdown, SearchNameField);
+            DoTextFieldWithClearButton(ref fieldPositions, "名称", ref objectPattern, RestartSearchCountdown, SearchNameField);
             fieldPositions.y += RowOffset;
-            DoTextFieldWithClearButton(ref fieldPositions, "無視", ref ignorePattern, RestartSearchCountdown);
+            DoTextFieldWithClearButton(ref fieldPositions, "忽略", ref ignorePattern, RestartSearchCountdown);
             fieldPositions.y += RowOffset;
-            DoTextFieldWithClearButton(ref fieldPositions, "コンポーネント", ref componentPattern, RestartSearchCountdown);
+            DoTextFieldWithClearButton(ref fieldPositions, "组件", ref componentPattern, RestartSearchCountdown);
             fieldPositions.y += RowOffset;
 
             var rowRect = new Rect(fieldPositions.x, fieldPositions.y, rowWidth, RowHeight);
-            if (GUI.Button(rowRect, "選択")) { FindAndSelectObjects(); }
+            if (GUI.Button(rowRect, "选择")) { FindAndSelectObjects(); }
 
             rowRect.y += RowOffset;
-            var message = Selection.objects.Length.ToString() + " 個のオブジェクトを選択中";
+            var message = "已选择 " + Selection.objects.Length + " 个对象";
             GUI.Label(rowRect, message);
 
             if (isInitialShow)

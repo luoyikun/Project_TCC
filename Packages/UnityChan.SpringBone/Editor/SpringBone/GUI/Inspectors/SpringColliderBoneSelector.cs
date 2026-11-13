@@ -28,7 +28,7 @@ namespace UTJ
         {
             if (totalBoneCount == 0) { return; }
 
-            const string SelectAllLabel = "全選択";
+            const string SelectAllLabel = "全选";
 
             SpringBoneGUIStyles.ReacquireStyles();
 
@@ -57,7 +57,7 @@ namespace UTJ
 
                 GUILayout.BeginVertical("box");
                 EditorGUILayout.Space();
-                EditorGUILayout.ObjectField("Manager", affectedBoneGroups[groupIndex].manager, typeof(SpringManager), true);
+                EditorGUILayout.ObjectField("管理器", affectedBoneGroups[groupIndex].manager, typeof(SpringManager), true);
                 GUILayout.Label(affectedBoneGroups[groupIndex].boneCountLabel);
                 if (boneCount >= 2 && GUILayout.Button(SelectAllLabel))
                 {

@@ -2,7 +2,7 @@
 
 namespace UTJ
 {
-    // スプリングボーン用の力を与えるベースクラス
+    // 为弹簧骨骼提供作用力的基类。
     public class ForceProvider : MonoBehaviour
     {
         public virtual Vector3 GetForceOnBone(SpringBone springBone)

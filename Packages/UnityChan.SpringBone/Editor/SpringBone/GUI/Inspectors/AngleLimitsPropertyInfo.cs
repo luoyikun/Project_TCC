@@ -7,13 +7,15 @@ namespace UTJ
     {
         public class AngleLimitPropertyInfo : PropertyInfo
         {
+            /// <summary>创建角度限制属性，并设置默认的下限与上限滑块。</summary>
             public AngleLimitPropertyInfo(string newName, string labelText)
                 : base(newName, labelText)
             {
-                minSlider = new FloatSlider("下限", 0f, -180f);
-                maxSlider = new FloatSlider("上限", 0f, 180f);
+                minSlider = new FloatSlider("最小值", 0f, -180f);
+                maxSlider = new FloatSlider("最大值", 0f, 180f);
             }
 
+            /// <summary>绘制角度限制滑块及对称调整按钮。</summary>
             public override void Show()
             {
                 GUILayout.Space(14f);
@@ -50,7 +52,7 @@ namespace UTJ
                     GUILayout.Space(SubSpacing);
                     GUILayout.BeginHorizontal();
 
-                    updateValuesTogether = GUILayout.Toggle(updateValuesTogether, "同時に変更");
+                    updateValuesTogether = GUILayout.Toggle(updateValuesTogether, "同步修改");
                     if (updateValuesTogether)
                     {
                         if (minChanged)
@@ -63,17 +65,17 @@ namespace UTJ
                         }
                     }
 
-                    if (GUILayout.Button("下限に統一"))
+                    if (GUILayout.Button("按最小值对称"))
                     {
                         maxProperty.floatValue = -minProperty.floatValue;
                     }
 
-                    if (GUILayout.Button("上限に統一"))
+                    if (GUILayout.Button("按最大值对称"))
                     {
                         minProperty.floatValue = -maxProperty.floatValue;
                     }
 
-                    if (GUILayout.Button("反転"))
+                    if (GUILayout.Button("反转"))
                     {
                         var minValue = minProperty.floatValue;
                         minProperty.floatValue = -maxProperty.floatValue;

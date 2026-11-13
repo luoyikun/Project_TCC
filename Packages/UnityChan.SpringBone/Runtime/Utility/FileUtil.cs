@@ -7,7 +7,7 @@ namespace UTJ
 {
     public class FileUtil
     {
-    	// 全てのテキストを読み込む。文字コードを認識しようとする
+        // 读取全部文本，并尝试识别字符编码。
     	public static string ReadAllText(string inFilePath, Encoding inDefaultEncoding)
     	{
             var outputText = "";
@@ -24,13 +24,13 @@ namespace UTJ
             return outputText;
     	}
     
-    	// 全てのテキストを読み込む。文字コードを認識しようとする
+        // 读取全部文本，并尝试识别字符编码。
     	public static string ReadAllText(string inFilePath)
     	{
     		return ReadAllText(inFilePath, TryToDetectEncoding(inFilePath, Encoding.Default));
     	}
     
-    	// 全てのテキスト行を読み込む。文字コードを認識しようとする
+        // 读取全部文本行，并尝试识别字符编码。
     	public static string[] ReadAllLines(string inFilePath, Encoding inDefaultEncoding)
     	{
             var outputLines = new string[0];
@@ -47,7 +47,7 @@ namespace UTJ
             return outputLines;
     	}
     	
-    	// 全てのテキスト行を読み込む。文字コードを認識しようとする
+        // 读取全部文本行，并尝试识别字符编码。
     	public static string[] ReadAllLines(string inFilePath)
     	{
     		return ReadAllLines(inFilePath, TryToDetectEncoding(inFilePath, Encoding.Default));
@@ -74,18 +74,18 @@ namespace UTJ
             return succeeded;
         }
 
-    	// エンコードを認識しようとする
+        // 尝试识别字符编码。
     	public static Encoding TryToDetectEncoding
     	(
     		string inFilePath,
     		Encoding inDefaultEncoding
     	)
     	{
-    		// BOM
+            // BOM
     		byte[] kUTF8Bom = { 0xEF, 0xBB, 0xBF };
     		byte[] kUTF16LEBom = { 0xFF, 0xFE };
     		byte[] kUTF16BEBom = { 0xFE, 0xFF };
-    		// XMLヘッダー
+            // XML 声明。
     		byte[] kXMLUTF8Header = { 0x3C, 0x3F, 0x78, 0x6D }; // <?xm
     		byte[] kXMLUTF16LEHeader = { 0x3C, 0x00 }; // <?
     		byte[] kXMLUTF16BEHeader = { 0x00, 0x3C }; // <?
@@ -111,7 +111,7 @@ namespace UTJ
     		return inDefaultEncoding;
     	}
     
-    	// エンコードを認識しようとする
+        // 尝试识别字符编码。
     	public static Encoding TryToDetectEncoding(string inFilePath)
     	{
     		return TryToDetectEncoding(inFilePath, Encoding.Default);
@@ -131,7 +131,7 @@ namespace UTJ
                 }
                 catch (System.Exception exception)
                 {
-                    Debug.LogError("フォルダーを表示できませんでした: " 
+                    Debug.LogError("无法打开文件夹："
                         + directory + "\n\n" + exception.ToString());
                 }
             }
@@ -140,7 +140,7 @@ namespace UTJ
         
         // private
 
-    	// ファイルの最初の数バイトを読み込む
+        // 读取文件开头的若干字节。
     	private static byte[] ReadFirstBytesOfFile(string inFilePath, int inNumBytesToRead)
     	{
     		byte[] outBytes = new byte[inNumBytesToRead];
@@ -168,7 +168,7 @@ namespace UTJ
     		return outBytes;
     	}
     
-    	// バッファーが指定したヘッダーで始まるかどうか
+        // 检查缓冲区是否以指定的头部内容开头。
     	private static bool CheckIfBufferStartsWithHeader(byte[] inBuffer, byte[] inHeader)
     	{
     		if (inBuffer.Length < inHeader.Length)

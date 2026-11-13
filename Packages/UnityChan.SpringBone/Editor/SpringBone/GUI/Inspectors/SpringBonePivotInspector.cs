@@ -9,11 +9,12 @@ namespace UTJ
     [CanEditMultipleObjects]
     public class SpringBonePivotInspector : Editor
     {
+        /// <summary>绘制基点检查器及其关联的管理器和骨骼。</summary>
         public override void OnInspectorGUI()
         {
             InitializeData();
 
-            if (GUILayout.Button("ボーンを選択", SpringBoneGUIStyles.ButtonStyle))
+            if (GUILayout.Button("选择骨骼", SpringBoneGUIStyles.ButtonStyle))
             {
                 Selection.objects = bones.Select(bone => bone.gameObject).ToArray();
             }
@@ -23,13 +24,13 @@ namespace UTJ
             var managerCount = managers.Length;
             for (int managerIndex = 0; managerIndex < managerCount; managerIndex++)
             {
-                EditorGUILayout.ObjectField("Manager", managers[managerIndex], typeof(SpringManager), true);
+                EditorGUILayout.ObjectField("管理器", managers[managerIndex], typeof(SpringManager), true);
             }
 
             var boneCount = bones.Length;
             for (int boneIndex = 0; boneIndex < boneCount; boneIndex++)
             {
-                EditorGUILayout.ObjectField("Bone", bones[boneIndex], typeof(SpringBone), true);
+                EditorGUILayout.ObjectField("骨骼", bones[boneIndex], typeof(SpringBone), true);
             }
         }
 

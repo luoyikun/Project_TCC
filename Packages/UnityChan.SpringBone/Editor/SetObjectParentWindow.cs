@@ -6,10 +6,11 @@ namespace UTJ
 {
     public class SetObjectParentWindow : EditorWindow
     {
-        [MenuItem("UTJ/親子付け")]
+        /// <summary>打开父子级设置窗口。</summary>
+        [MenuItem("UTJ/设置父子级")]
         public static void ShowWindow()
         {
-            GetWindow<SetObjectParentWindow>("親子付け");
+            GetWindow<SetObjectParentWindow>("设置父子级");
         }
 
         // private
@@ -28,12 +29,13 @@ namespace UTJ
             }
         }
 
+        /// <summary>绘制父级对象选择框和执行按钮。</summary>
         private void OnGUI()
         {
             EditorGUILayout.Space();
-            newParent = EditorGUILayout.ObjectField("新しい親", newParent, typeof(Transform), true) as Transform;
+            newParent = EditorGUILayout.ObjectField("新父级", newParent, typeof(Transform), true) as Transform;
             EditorGUILayout.Space();
-            if (GUILayout.Button("親子付け"))
+            if (GUILayout.Button("设置父子级"))
             {
                 ReparentSelectedObjects();
             }

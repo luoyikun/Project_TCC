@@ -11,7 +11,7 @@ namespace UTJ
             public enum SearchOptions
             {
                 None,
-                IgnoreNamespace // Maya風「namespace:objectname」の「namespace:」の部分を無視
+                IgnoreNamespace // 忽略 Maya 风格名称“namespace:objectname”中的 namespace 部分。
             }
 
             // Includes inactive objects
@@ -32,7 +32,7 @@ namespace UTJ
                 return FindComponentsOfType<Transform>().Select(item => item.gameObject);
             }
 
-            // 指定したクラスの名前→コンポーネントのマップを作成
+            // 创建从指定类名到组件的映射。
             public static Dictionary<string, T> BuildNameToComponentMap<T>
             (
                 this GameObject rootObject,
@@ -75,7 +75,7 @@ namespace UTJ
                 return FindChildComponentByName<Transform>(inRoot, inName, searchOptions);
             }
 
-            // 子供の指定した名前のオブジェクトを検出
+            // 查找子级中具有指定名称的对象。
             public static T FindChildComponentByName<T>
             (
                 this GameObject inRoot,
@@ -108,7 +108,7 @@ namespace UTJ
                 return null;
             }
 
-            // 子供の指定した名前のオブジェクトを検出
+            // 查找子级中具有指定名称的对象。
             public static T[] FindChildComponentsByName<T>
             (
                 this GameObject inRoot,

@@ -25,12 +25,12 @@ namespace Unity.TinyCharacterController.Utility
         public const int Control = 5;
         
         // ----------------------------------
-        // 計算結果を反映 ( ExecuteOrder )
+        // 应用计算结果（ExecuteOrder）。
         // ----------------------------------
 
-        public const int EarlyUpdateBrain = -101;   // InputSystemより前
-        public const int UpdateBrain = 10;          // Brainの更新タイミング
-        public const int PostUpdate = 100;          // Brainの後
-        public const int UpdateIK = 50;             // Ikの更新タイミング
+        public const int EarlyUpdateBrain = -101;   // 在 Input System 更新之前。
+        public const int UpdateBrain = 10;          // Brain 的更新时间。
+        public const int PostUpdate = 100;          // 在 Brain 更新之后。
+        public const int UpdateIK = 50;             // IK 的更新时间。
     }
 }

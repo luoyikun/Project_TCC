@@ -13,6 +13,7 @@ namespace UTJ
     [CanEditMultipleObjects]
     public class SpringBoneInspector : Editor
     {
+        /// <summary>绘制弹簧骨骼属性、管理器信息和角度限制工具。</summary>
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
@@ -21,7 +22,7 @@ namespace UTJ
 
             var bone = (SpringBone)target;
 
-            if (GUILayout.Button("基点を選択", SpringBoneGUIStyles.ButtonStyle))
+            if (GUILayout.Button("选择基点", SpringBoneGUIStyles.ButtonStyle))
             {
                 Selection.objects = targets
                     .Select(item => ((SpringBone)item).pivotNode)
@@ -34,9 +35,9 @@ namespace UTJ
             var managerCount = managers.Length;
             for (int managerIndex = 0; managerIndex < managerCount; managerIndex++)
             {
-                EditorGUILayout.ObjectField("マネージャー", managers[managerIndex], typeof(SpringManager), true);
+                EditorGUILayout.ObjectField("管理器", managers[managerIndex], typeof(SpringManager), true);
             }
-            var newEnabled = EditorGUILayout.Toggle("有効", bone.enabled);
+            var newEnabled = EditorGUILayout.Toggle("启用", bone.enabled);
             GUILayout.EndVertical();
 
             if (newEnabled != bone.enabled)
@@ -46,7 +47,7 @@ namespace UTJ
                     .Where(targetBone => targetBone != null);
                 if (targetBones.Any())
                 {
-                    Undo.RecordObjects(targetBones.ToArray(), "SpringBoneの有効状態を変更");
+                    Undo.RecordObjects(targetBones.ToArray(), "更改弹簧骨骼启用状态");
                     foreach (var targetBone in targetBones)
                     {
                         targetBone.enabled = newEnabled;
@@ -68,7 +69,7 @@ namespace UTJ
                 RenderAngleLimitVisualization();
             }
 
-            showOriginalInspector = EditorGUILayout.Toggle("標準インスペクター表示", showOriginalInspector);
+            showOriginalInspector = EditorGUILayout.Toggle("显示默认检查器", showOriginalInspector);
             GUILayout.Space(Spacing);
             if (showOriginalInspector)
             {
@@ -134,8 +135,8 @@ namespace UTJ
             
             GUILayout.BeginVertical("box");
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Y 軸角度制限");
-            GUILayout.Label("Z 軸角度制限");
+            GUILayout.Label("Y 轴角度限制");
+            GUILayout.Label("Z 轴角度限制");
             GUILayout.EndHorizontal();
             EditorGUILayout.Space();
             const float DefaultRectHeight = 100f;
@@ -209,6 +210,7 @@ namespace UTJ
             private PropertyInfo[] properties;
         }
 
+        /// <summary>从当前目标收集管理器和弹簧骨骼属性。</summary>
         private void InitializeData()
         {
             if (managers != null && managers.Length > 0)
@@ -230,35 +232,35 @@ namespace UTJ
             InitializeData();
 
             var forceProperties = new PropertyInfo[] {
-                new PropertyInfo("stiffnessForce", "硬さ"),
-                new PropertyInfo("dragForce", "空気抵抗"),
+                new PropertyInfo("stiffnessForce", "硬度"),
+                new PropertyInfo("dragForce", "空气阻力"),
                 new PropertyInfo("springForce", "重力"),
-                new PropertyInfo("windInfluence", "風の影響値")
+                new PropertyInfo("windInfluence", "风力影响")
             };
 
             var angleLimitProperties = new PropertyInfo[] {
                 new PropertyInfo("pivotNode", "基点"),
-                new PropertyInfo("angularStiffness", "回転の硬さ"),
-                new AngleLimitPropertyInfo("yAngleLimits", "Y 軸角度制限"),
-                new AngleLimitPropertyInfo("zAngleLimits", "Z 軸角度制限")
+                new PropertyInfo("angularStiffness", "旋转硬度"),
+                new AngleLimitPropertyInfo("yAngleLimits", "Y 轴角度限制"),
+                new AngleLimitPropertyInfo("zAngleLimits", "Z 轴角度限制")
             };
 
             var lengthLimitProperties = new PropertyInfo[] {
-                new PropertyInfo("lengthLimitTargets", "ターゲット")
+                new PropertyInfo("lengthLimitTargets", "目标对象")
             };
 
             var collisionProperties = new PropertyInfo[] {
                 new PropertyInfo("radius", "半径"),
                 new PropertyInfo("sphereColliders", "球体"),
-                new PropertyInfo("capsuleColliders", "カプセル"),
-                new PropertyInfo("panelColliders", "板")
+                new PropertyInfo("capsuleColliders", "胶囊体"),
+                new PropertyInfo("panelColliders", "平面碰撞体")
             };
 
             propertySets = new PropertySet[] {
                 new PropertySet("力", forceProperties), 
-                new PropertySet("角度制限", angleLimitProperties),
-                new PropertySet("距離制限", lengthLimitProperties),
-                new PropertySet("当たり判定", collisionProperties),
+                new PropertySet("角度限制", angleLimitProperties),
+                new PropertySet("距离限制", lengthLimitProperties),
+                new PropertySet("碰撞检测", collisionProperties),
             };
 
             foreach (var set in propertySets)

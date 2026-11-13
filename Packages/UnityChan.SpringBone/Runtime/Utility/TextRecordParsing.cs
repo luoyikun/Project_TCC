@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UTJ
 {
-    // CSVやタブスペースで区切ったテキストファイルを読み込む簡易読み込み関数
+    // 简易读取以 CSV 或制表符分隔的文本文件
     public class TextRecordParsing
     {
         public const string DefaultSeparators = "\t,";
@@ -56,13 +56,13 @@ namespace UTJ
             private List<string> items = new List<string>();
         }
 
-        // レコードのアイテムを取得。存在しない場合は空の文字列を返す。
+        // 获取记录项；不存在时返回空字符串。
         public static string GetString(List<string> items, int index)
         {
             return (index >= 0 && index < items.Count) ? items[index] : "";
         }
 
-        // レコードの数字を取得します。アイテムが空・false・0の場合はfalseを返します
+        // 获取记录中的数字；项目为空、为 false 或为 0 时返回 false。
         public static bool GetBool(List<string> items, int index)
         {
             var falseItems = new List<string> { "0", "false" };
@@ -70,7 +70,7 @@ namespace UTJ
             return itemString.Length > 0 && !falseItems.Contains(itemString);
         }
 
-        // レコードの数字を取得します。できなかった場合はfalseを返す。
+        // 获取记录中的数字；转换失败时返回 false。
         public static bool GetInt(List<string> items, int index, ref int output)
         {
             var item = GetString(items, index);
@@ -83,7 +83,7 @@ namespace UTJ
             return succeeded;
         }
 
-        // レコードの数字を取得します。できなかった場合はfalseを返す。
+        // 获取记录中的数字；转换失败时返回 false。
         public static bool GetFloat(List<string> items, int index, ref float output)
         {
             var item = GetString(items, index);
@@ -96,7 +96,7 @@ namespace UTJ
             return succeeded;
         }
 
-        // ベクトルを取得。できなかったらfalseを返す。
+        // 获取向量；转换失败时返回 false。
         public static bool GetVector3(List<string> items, int startIndex, ref Vector3 output)
         {
             var succeeded = false;

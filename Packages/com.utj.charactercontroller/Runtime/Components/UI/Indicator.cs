@@ -174,9 +174,9 @@ namespace Unity.TinyCharacterController.UI
         }
 
         /// <summary>
-        /// 動作するためのチェック
+        /// 检查组件是否可以运行。
         /// </summary>
-        /// <returns>動作可能ならばTrue</returns>
+        /// <returns>如果可以运行则返回 true。</returns>
         private bool InitializeCheck()
         {
             if (_isInitialized == false)

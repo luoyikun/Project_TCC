@@ -34,6 +34,7 @@ namespace UTJ
             return "";
         }
 
+        /// <summary>根据骨骼列表查找角色中指定用于动力学处理的骨骼对象。</summary>
         public static IEnumerable<GameObject> GetBonesDesignatedForDynamics(GameObject rootObject)
         {
             // First try to find bone list from character's model data folder
@@ -53,7 +54,7 @@ namespace UTJ
                     }
                     else
                     {
-                        Debug.LogWarning("ダイナミクス骨が見つかりません: " + boneName);
+                        Debug.LogWarning("未找到动力学骨骼：" + boneName);
                     }
                 }
                 return dynamicsBones;

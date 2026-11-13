@@ -8,9 +8,10 @@ namespace UTJ
 {
     public class MirrorSpringBoneWindow : EditorWindow
     {
+        /// <summary>打开弹簧骨骼镜像窗口并读取当前选择。</summary>
         public static void ShowWindow()
         {
-            var window = GetWindow<MirrorSpringBoneWindow>("SpringBoneミラー");
+            var window = GetWindow<MirrorSpringBoneWindow>("镜像弹簧骨骼");
             window.Show();
             window.OnShow();
         }
@@ -47,6 +48,7 @@ namespace UTJ
         private List<BoneEntry> boneEntries;
         private Vector2 scrollPosition;
 
+        /// <summary>绘制镜像设置、骨骼映射列表和执行按钮。</summary>
         private void OnGUI()
         {
             SpringBoneGUIStyles.ReacquireStyles();
@@ -57,16 +59,17 @@ namespace UTJ
             uiRect = ShowUtilityButtons(uiRect);
             uiRect = ShowBoneList(uiRect);
 
-            if (GUI.Button(uiRect, "ミラーを行う", SpringBoneGUIStyles.ButtonStyle))
+            if (GUI.Button(uiRect, "执行镜像", SpringBoneGUIStyles.ButtonStyle))
             {
                 PerformMirror();
             }
         }
 
+        /// <summary>绘制选择源/目标骨骼的辅助按钮。</summary>
         private Rect ShowUtilityButtons(Rect uiRect)
         {
             var buttonOffset = uiRect.height + Spacing;
-            if (GUI.Button(uiRect, "選択から取得", SpringBoneGUIStyles.ButtonStyle))
+            if (GUI.Button(uiRect, "从所选对象获取", SpringBoneGUIStyles.ButtonStyle))
             {
                 AcquireBonesFromSelection();
             }
@@ -74,12 +77,12 @@ namespace UTJ
 
             var halfRectWidth = 0.5f * (uiRect.width - Spacing);
             var halfButtonRect = new Rect(uiRect.x, uiRect.y, halfRectWidth, uiRect.height);
-            if (GUI.Button(halfButtonRect, "X < 0のボーンを元に設定", SpringBoneGUIStyles.ButtonStyle))
+            if (GUI.Button(halfButtonRect, "将 X < 0 的骨骼设为源", SpringBoneGUIStyles.ButtonStyle))
             {
                 AcquireSourceBonesOnSideOfAxis(true);
             }
             halfButtonRect.x += halfRectWidth + Spacing;
-            if (GUI.Button(halfButtonRect, "X > 0のボーンを元に設定", SpringBoneGUIStyles.ButtonStyle))
+            if (GUI.Button(halfButtonRect, "将 X > 0 的骨骼设为源", SpringBoneGUIStyles.ButtonStyle))
             {
                 AcquireSourceBonesOnSideOfAxis(false);
             }
@@ -87,20 +90,20 @@ namespace UTJ
 
             halfButtonRect.x = uiRect.x;
             halfButtonRect.y = uiRect.y;
-            if (GUI.Button(halfButtonRect, "コピー元を全選択", SpringBoneGUIStyles.ButtonStyle))
+            if (GUI.Button(halfButtonRect, "全选源骨骼", SpringBoneGUIStyles.ButtonStyle))
             {
                 var sourceBones = boneEntries.Select(entry => entry.sourceBone).Where(bone => bone != null);
                 if (sourceBones.Any()) { Selection.objects = sourceBones.Select(bone => bone.gameObject).ToArray(); }
             }
             halfButtonRect.x += halfRectWidth + Spacing;
-            if (GUI.Button(halfButtonRect, "コピー先を全選択", SpringBoneGUIStyles.ButtonStyle))
+            if (GUI.Button(halfButtonRect, "全选目标骨骼", SpringBoneGUIStyles.ButtonStyle))
             {
                 var targetBones = boneEntries.Select(entry => entry.targetBone).Where(bone => bone != null);
                 if (targetBones.Any()) { Selection.objects = targetBones.Select(bone => bone.gameObject).ToArray(); }
             }
             uiRect.y += buttonOffset;
 
-            if (GUI.Button(uiRect, "全選択", SpringBoneGUIStyles.ButtonStyle))
+            if (GUI.Button(uiRect, "全选", SpringBoneGUIStyles.ButtonStyle))
             {
                 var bonesToSelect = new List<SpringBone>();
                 bonesToSelect.AddRange(boneEntries.Select(entry => entry.sourceBone).Where(bone => bone != null));
@@ -112,14 +115,15 @@ namespace UTJ
             return uiRect;
         }
 
+        /// <summary>绘制源骨骼与目标骨骼的对应列表。</summary>
         private Rect ShowBoneList(Rect uiRect)
         {
             var listBoxBottom = position.height - (Spacing * 2f + RowHeight);
 
             var headerRowRect = new Rect(uiRect.x, uiRect.y, uiRect.width * 0.5f, uiRect.height);
-            GUI.Label(headerRowRect, "元", SpringBoneGUIStyles.LabelStyle);
+            GUI.Label(headerRowRect, "源", SpringBoneGUIStyles.LabelStyle);
             headerRowRect.x += headerRowRect.width;
-            GUI.Label(headerRowRect, "→ 先", SpringBoneGUIStyles.LabelStyle);
+            GUI.Label(headerRowRect, "→ 目标", SpringBoneGUIStyles.LabelStyle);
             uiRect.y += uiRect.height;
 
             const float ScrollbarWidth = 20f;

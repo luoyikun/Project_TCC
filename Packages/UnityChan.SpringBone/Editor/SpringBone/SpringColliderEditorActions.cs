@@ -8,11 +8,14 @@ namespace UTJ
 {
     public static class SpringColliderEditorActions
     {
+        /// <summary>为每个所选对象创建子对象并添加指定组件。</summary>
+        /// <param name="suffix">生成对象名称使用的后缀。</param>
+        /// <returns>新建的子对象列表。</returns>
         public static IList<GameObject> CreateObjectsWithComponentBeneathSelectedObjects<T>(string suffix) where T : Component
         {
             if (Application.isPlaying)
             {
-                Debug.LogError("再生モードを止めてください。");
+                Debug.LogError("请先退出播放模式。");
                 return new List<GameObject>();
             }
 
@@ -92,11 +95,12 @@ namespace UTJ
             CreateObjectsWithComponentBeneathSelectedObjects<SpringPanelCollider>("PanelCollider");
         }
 
+        /// <summary>删除所选弹簧骨骼关联的所有碰撞体。</summary>
         public static void DeleteCollidersFromSelectedSpringBones()
         {
             if (Application.isPlaying)
             {
-                Debug.LogError("再生モードを止めてください。");
+                Debug.LogError("请先退出播放模式。");
                 return;
             }
 
@@ -105,10 +109,10 @@ namespace UTJ
                 .Where(bone => bone != null);
             if (!selectedBones.Any()) { return; }
 
-            var queryMessage = "本当に選択SpringBoneのコリジョンを削除しますか？";
-            if (EditorUtility.DisplayDialog("コリジョンを削除", queryMessage, "削除", "キャンセル"))
+            var queryMessage = "确定删除所选弹簧骨骼关联的碰撞体吗？";
+            if (EditorUtility.DisplayDialog("删除碰撞体", queryMessage, "删除", "取消"))
             {
-                Undo.RecordObjects(selectedBones.ToArray(), "コリジョンを削除");
+                Undo.RecordObjects(selectedBones.ToArray(), "删除碰撞体");
                 foreach (var springBone in selectedBones)
                 {
                     springBone.RemoveAllColliders();
@@ -116,18 +120,19 @@ namespace UTJ
             }
         }
 
+        /// <summary>删除所选对象及其子级上的所有碰撞体。</summary>
         public static void DeleteAllChildCollidersFromSelection()
         {
             if (Application.isPlaying)
             {
-                Debug.LogError("再生モードを止めてください。");
+                Debug.LogError("请先退出播放模式。");
                 return;
             }
 
             if (Selection.gameObjects.Length == 0) { return; }
 
-            var queryMessage = "本当に選択中のオブジェクトの全子供のコライダーを削除しますか？";
-            if (!EditorUtility.DisplayDialog("選択コライダーを削除", queryMessage, "削除", "キャンセル"))
+            var queryMessage = "确定删除所选对象及其所有子级上的碰撞体吗？";
+            if (!EditorUtility.DisplayDialog("删除所选碰撞体", queryMessage, "删除", "取消"))
             {
                 return;
             }
@@ -178,19 +183,20 @@ namespace UTJ
             }
         }
 
+        /// <summary>清理未使用或重复的弹簧骨骼、管理器和碰撞体组件。</summary>
         public static void CleanUpDynamics()
         {
             if (Application.isPlaying)
             {
-                Debug.LogError("再生モードを止めてください。");
+                Debug.LogError("请先退出播放模式。");
                 return;
             }
 
             var springManagers = GameObjectUtil.FindComponentsOfType<SpringManager>();
             if (!springManagers.Any()) { return; }
 
-            var queryMessage = "本当にダイナミクスのクリーンナップを行いますか？";
-            if (EditorUtility.DisplayDialog("ダイナミクスクリーンナップ", queryMessage, "削除", "キャンセル"))
+            var queryMessage = "确定清理动力学组件吗？";
+            if (EditorUtility.DisplayDialog("清理动力学组件", queryMessage, "清理", "取消"))
             {
                 RemoveDuplicateComponents<SpringBone>();
                 RemoveDuplicateComponents<DynamicsNull>();

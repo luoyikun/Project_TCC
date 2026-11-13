@@ -15,7 +15,7 @@ namespace TinyCharacterControllerEditor
         {
             var root = new VisualElement();
 
-            // UIを構築
+            // 构建 UI。
             BuildUi(root, 
                 out var isUseLifetime, 
                 out var lifeTime, 
@@ -38,12 +38,12 @@ namespace TinyCharacterControllerEditor
         }
 
         /// <summary>
-        /// UIを構築する
+        /// 构建 UI。
         /// </summary>
-        /// <param name="root">設定するルートオブジェクト</param>
-        /// <param name="isUseLifetime">IsUseLifeTimeのElement</param>
-        /// <param name="lifeTime">lifeTimeのElement</param>
-        /// <param name="onReleaseByLifeTime">onReleaseByLifeTimeのElement</param>
+        /// <param name="root">要设置的根对象。</param>
+        /// <param name="isUseLifetime">IsUseLifeTime 对应的界面元素。</param>
+        /// <param name="lifeTime">lifeTime 对应的界面元素。</param>
+        /// <param name="onReleaseByLifeTime">onReleaseByLifeTime 对应的界面元素。</param>
         private static void BuildUi(in VisualElement root, 
             out Toggle isUseLifetime, out PropertyField lifeTime, out PropertyField onReleaseByLifeTime)
         {

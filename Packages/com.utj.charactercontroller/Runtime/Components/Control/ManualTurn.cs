@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 namespace Unity.TinyCharacterController.Control
 {
     /// <summary>
-    /// キャラクターの向きを手動で設定するコンポーネント
+    /// 用于手动设置角色朝向的组件。
     /// ManualControl推奨
     /// </summary>
     [Obsolete("Recommends Manual Control")]

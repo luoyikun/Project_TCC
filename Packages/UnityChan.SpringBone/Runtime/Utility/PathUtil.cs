@@ -31,10 +31,10 @@ namespace UTJ
             return NormalizePath(combinedPath);
         }
 
-        // OS上のディレクトリーをプロジェクト内のAssets/で始まるディレクトリーに変換
+        // 将操作系统中的目录转换为项目中以 Assets/ 开头的目录路径。
         public static string SystemPathToAssetPath(string inSystemPath)
         {
-            // Assetsより一つ上のフォルダーを取得
+            // 获取 Assets 的上一级目录。
             var projectPath = Application.dataPath;
             var projectURI = new System.Uri(projectPath);
             var fullURI = new System.Uri(inSystemPath);
@@ -59,8 +59,8 @@ namespace UTJ
             return finalPath;
         }
 
-        // Resourcesディレクトリーが入ってるパスを見つけて、その後のパスを返す
-        // Resourcesが入っていない場合は空の文字列を返す
+        // 查找包含 Resources 目录的路径，并返回其后续路径。
+        // 如果路径中不包含 Resources，则返回空字符串。
         public static string PathToResourcePath(string sourcePath)
         {
             const string ResourcesDirectory = "resources/";

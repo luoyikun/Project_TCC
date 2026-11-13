@@ -7,9 +7,9 @@
 // namespace TinyCharacterController
 // {
 //     /// <summary>
-//     /// 坂道に乗ったときに滑る挙動を追加するコンポーネント。
-//     /// 坂道を滑っている間はプライオリティを上げて移動制御をオーバーライドすることも可能。
-//     /// 坂道の最後で停止する場合はMeshColliderでConvexを使用するか、BoxColliderのようなプリミティブなコライダーを使用する。
+//     /// 为角色添加在斜坡上滑动的行为。
+//     /// 角色在斜坡上滑动时，可以提高优先级以覆盖移动控制。
+//     /// 若要让角色在斜坡末端停下，请使用启用 Convex 的 MeshCollider 或 BoxCollider 等基本碰撞体。
 //     /// </summary>
 //     [AddComponentMenu(MenuList.MenuEffect + "Slide On Slope")]
 //     [DisallowMultipleComponent]
@@ -21,43 +21,43 @@
 //         ICharacterTurn, 
 //         IEarlyUpdateComponent
 //     {
-//         [Header("滑る坂道の設定")]
-//         [Tooltip("坂道と判定する角度")]
+//         [Header("斜坡滑动设置")]
+//         [Tooltip("判定为斜坡的角度")]
 //         [SerializeField] 
 //         private float _slideAngle = 45;
 //         
-//         [Tooltip("坂道を滑る速度の倍率")]
+//         [Tooltip("斜坡滑动速度倍率")]
 //         [SerializeField] 
 //         private float _slideSpeed = 1f;
 //
-//         [Header("滑っているときの設定")] 
+//         [Header("滑动时的设置")]
 //         [SerializeField] [Range(0, 100)]
 //         private int _acceleration = 50;
 //
 //         [SerializeField, Range(0, 100)] 
 //         private int _brake = 10;
 //
-//         [Tooltip("坂道を滑る時の移動プライオリティ。滑っていない場合は内部的にプライオリティは0になる。")]
+//         [Tooltip("斜坡滑动时的移动优先级；未滑动时内部优先级为 0。")]
 //         [SerializeField] 
 //         private int _movePriorityWhenSliding = 10;
 //
-//         [Tooltip("坂道を滑る時の回転プライオリティ。滑っていない場合は内部的にプライオリティは0になる。")] 
+//         [Tooltip("斜坡滑动时的旋转优先级；未滑动时内部优先级为 0。")]
 //         [SerializeField]
 //         private int _rotationPriorityWhenSliding = 10;
 //
-//         [Tooltip("滑っている方向を向く速度。RotationPriorityが高い場合に有効")]
+//         [Tooltip("角色转向滑动方向的速度。仅在 RotationPriority 较高时生效。")]
 //         [SerializeField]
 //         [Range(-1, 50)]
 //         private int _rotationSpeed = 30;
 //
 //         
 //         /// <summary>
-//         /// 滑る坂道の角度
+//         /// 斜坡滑动角度。
 //         /// </summary>
 //         public float SlideAngle { get => _slideAngle; set => _slideAngle = value; }
 //
 //         /// <summary>
-//         /// 現在滑って移動しているかの判定
+//         /// 检查当前是否正在滑动。
 //         /// </summary>
 //         public bool IsSliding { get; private set; }
 //

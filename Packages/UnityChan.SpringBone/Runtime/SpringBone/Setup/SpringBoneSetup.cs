@@ -16,8 +16,8 @@ namespace UTJ
 #endif
         }
 
-        // オブジェクトとその子供に当たっている全てのSpringBoneとSpringManagerを削除
-        // この関数はDestroyImmediateを使うのでエディターの時以外は使わないでください！
+        // 删除对象及其子级上的所有 SpringBone 和 SpringManager。
+        // 此函数使用 DestroyImmediate，请只在编辑器中调用！
         public static void DestroySpringManagersAndBones(GameObject rootObject)
         {
             DestroyPivotObjects(rootObject);
@@ -35,7 +35,7 @@ namespace UTJ
             }
         }
 
-        // 全子供にSpringBoneを見つけて、springManagerに割り当てる
+        // 查找所有子级上的 SpringBone，并将它们分配给 springManager。
         public static void FindAndAssignSpringBones(SpringManager springManager, bool includeInactive = false)
         {
             if (springManager != null)
@@ -45,7 +45,7 @@ namespace UTJ
             }
         }
 
-        // オブジェクトとその子供にSpringBoneを当てる
+        // 将 SpringBone 添加到对象及其子级。
         public static void AssignSpringBonesRecursively(Transform rootObject)
         {
             if (rootObject.childCount == 0) { return; }
@@ -84,7 +84,7 @@ namespace UTJ
             return pivotDictionary;
         }
 
-        // 基点オブジェクトの位置をすべて合わせる
+        // 对齐所有基点对象的位置。
         public static void FixAllPivotNodePositions(GameObject rootObject)
         {
             var pivotToSpringBoneMap = GetPivotToSpringBoneMap(rootObject);
@@ -101,7 +101,7 @@ namespace UTJ
             }
         }
 
-        // 基点ノードを作成
+        // 创建基点节点。
         public static GameObject CreateSpringPivotNode(SpringBone springBone)
         {
             var pivotObject = new GameObject(springBone.name + "_Pivot");

@@ -27,6 +27,7 @@ namespace UTJ
             }
         }
 
+        /// <summary>绘制管理器操作按钮和组件属性。</summary>
         public override void OnInspectorGUI()
         {
             if (targets.Length == 1)
@@ -35,9 +36,9 @@ namespace UTJ
                 if (actionButtons == null || actionButtons.Length == 0)
                 {
                     actionButtons = new[] {
-                        new SpringManagerButton("窓を表示", ShowSpringWindow),
-                        new SpringManagerButton("SpringBoneを全て選択", SelectAllBones),
-                        new SpringManagerButton("SpringBoneリストを更新", UpdateBoneList)
+                        new SpringManagerButton("显示工具窗口", ShowSpringWindow),
+                        new SpringManagerButton("全选弹簧骨骼", SelectAllBones),
+                        new SpringManagerButton("更新弹簧骨骼列表", UpdateBoneList)
                     };
                 }
 
@@ -49,7 +50,7 @@ namespace UTJ
                 }
                 EditorGUILayout.Space();
                 var boneCount = (manager.springBones != null) ? manager.springBones.Length : 0;
-                GUILayout.Label("Bones: " + boneCount);
+                GUILayout.Label("骨骼数量: " + boneCount);
                 EditorGUILayout.Space();
             }
 
