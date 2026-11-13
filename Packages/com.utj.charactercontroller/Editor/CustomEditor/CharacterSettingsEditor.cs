@@ -3,7 +3,6 @@ using Unity.TinyCharacterController;
 using Unity.TinyCharacterControllerEditor;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace TinyCharacterControllerEditor
 {
@@ -13,6 +12,7 @@ namespace TinyCharacterControllerEditor
     {
         private readonly TccCondition _condition = new ();
         private GUIContent _title;
+        private Vector2 _scrollPosition;
 
         private void Awake()
         {
@@ -24,21 +24,18 @@ namespace TinyCharacterControllerEditor
 
         public override GUIContent GetPreviewTitle() => _title;
 
-        public override VisualElement CreatePreview(VisualElement previewWindow)
+        public override void OnPreviewGUI(Rect previewArea, GUIStyle background)
         {
             OnUpdate();
-            
-            previewWindow.Clear();
 
-            var scrollView = new ScrollView();
+            GUILayout.BeginArea(previewArea);
+            _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
             foreach (var message in _condition.ErrorMessages)
             {
-                var box = new HelpBox(message, HelpBoxMessageType.Warning);
-                scrollView.Add(box);
+                EditorGUILayout.HelpBox(message, MessageType.Warning);
             }
-            
-            previewWindow.Add(scrollView);
-            return previewWindow;
+            EditorGUILayout.EndScrollView();
+            GUILayout.EndArea();
         }
 
         /// <summary>
