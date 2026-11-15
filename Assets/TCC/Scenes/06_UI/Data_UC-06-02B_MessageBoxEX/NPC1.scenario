@@ -7,16 +7,16 @@
 
 @play_animation NPC_1, Talking
 @image Character, Kohaku_01
-@name 大鳥こはく
+@name 大鸟琥珀
 
-このシーンでの選択肢は最大三つ！
+每个场景最多可以设置三个选项！
 
 ---
 
 @image Character, Kohaku_04
-@name 大鳥こはく
+@name 大鸟琥珀
 
-空欄にする事で自動的にソートされるよ！
+留空后就会自动排序哦！
 
 ---
 
@@ -28,15 +28,15 @@
 
 @play_animation NPC_1, Yes
 @image Character, Kohaku_05
-@name 大鳥こはく
-ホントホント！
+@name 大鸟琥珀
+真的真的！
 
 ---
 
 @play_animation NPC_1, Talking
 @image Character, Kohaku_04
-@name 大鳥こはく
-疑うなら「NPC_1」のグラフを見てよ！
+@name 大鸟琥珀
+不信的话就看看「NPC_1」的图表嘛！
 
 ---
 
@@ -47,38 +47,38 @@
 #Tag Chapter3
 
 @image Character, Kohaku_04
-@name 大鳥こはく
-おおっと！？
+@name 大鸟琥珀
+哎呀！？
 ---
 
 @image Character, Kohaku_01
-@name 大鳥こはく
-ごめん、よく見たら４つだった。
-
----
-
-@image Character, Kohaku_01
-@name 大鳥こはく
-一応、増やそうと思えば増やせるよ！
+@name 大鸟琥珀
+抱歉，仔细一看其实有四个。
 
 ---
 
 @image Character, Kohaku_01
-@name 大鳥こはく
-DialogのOptionsを増やした上で、
-Button Callbacksでも登録する感じかな。
+@name 大鸟琥珀
+其实想增加的话还是可以增加的！
 
 ---
 
-@name 大鳥こはく
+@image Character, Kohaku_01
+@name 大鸟琥珀
+增加 Dialog 的 Options 之后，
+再通过 Button Callbacks 注册，大概是这样吧。
+
+---
+
+@name 大鸟琥珀
 @image Character, Kohaku_05
 
-自動的に数が増える設定にはなってないんだよね。
+选项数量并不会自动增加。
 
 ---
 
-@name 大鳥こはく
-でも増やしすぎると視認性が下がるから注意ね！
+@name 大鸟琥珀
+不过选项太多会影响阅读，请注意哦！
 
 ---
 
@@ -90,5 +90,5 @@ Button Callbacksでも登録する感じかな。
 
 @play_animation NPC_1, No
 @image Character, Kohaku_01
-@name 大鳥こはく
-た、多分無いはずだよ…！？
+@name 大鸟琥珀
+应、应该没有了吧……！？

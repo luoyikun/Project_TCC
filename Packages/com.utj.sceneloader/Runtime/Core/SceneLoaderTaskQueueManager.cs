@@ -98,13 +98,11 @@ namespace Unity.SceneManagement
             }
         }
 
-        /// <summary>
-        /// Executes an action with a one-frame delay.
-        /// To address cases where Addressables are not released after scene unloading
-        /// </summary>
+        /// <summary>延迟到下一帧继续处理队列，避免场景卸载与 Addressables 释放冲突。</summary>
         private async Task ProcessQueueNextFrame()
         {
-            await Awaitable.NextFrameAsync();
+            // Unity 2022.3 不支持 Awaitable；此处从主线程让出执行，由 Unity 同步上下文在下一帧恢复。
+            await Task.Yield();
             ProcessQueue();
         }
 
